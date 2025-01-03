@@ -7,5 +7,5 @@ velocimeter.defineAlpha(0.9)
 
 while True:
     velocimeter.start()
-    velocimeter.waitForUpdate()
-    print("Speed: " + velocimeter.getSpeed())
+    velocimeter.waitForUpdate(6)
+    print("Speed: " + str(velocimeter.getSpeed()))
