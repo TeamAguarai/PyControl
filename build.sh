@@ -55,3 +55,9 @@ done
 
 cmake ..
 make
+
+mv -f pycontrol.cpython-311-aarch64-linux-gnu.so /usr/lib/python3/dist-packages/
+
+echo ""
+echo "Libreria PyControl instalada correctamente en /usr/lib/python3/dist-packages/"
+echo "Asegurate de importar pycontrol en tus proyectos de python"
