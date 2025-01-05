@@ -1,88 +1,88 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
-#include "build/control.h" // este archivo solo existe despues de ejecutar build.sh
+#include "build/pampas.h" // este archivo solo existe despues de ejecutar build.sh
 
 namespace py = pybind11;
 
-PYBIND11_MODULE(pycontrol, m) {
-    m.doc() = "Bindings for control library";
+PYBIND11_MODULE(pypampas, m) {
+    m.doc() = "Bindings for pampas library";
 
-    m.def("hello", &control::hello);
+    m.def("hello", &pampas::hello);
 
     // Conversion class
-    py::class_<control::Conversion>(m, "Conversion")
+    py::class_<pampas::Conversion>(m, "Conversion")
         .def(py::init<>())
-        .def("isDefined", &control::Conversion::isDefined)
-        .def("define", &control::Conversion::define)
-        .def("convert", &control::Conversion::convert);
+        .def("isDefined", &pampas::Conversion::isDefined)
+        .def("define", &pampas::Conversion::define)
+        .def("convert", &pampas::Conversion::convert);
 
     // Drive class
-    py::class_<control::Drive>(m, "Drive")
+    py::class_<pampas::Drive>(m, "Drive")
         .def(py::init<>())
-        .def("run", &control::Drive::run)
-        .def("stop", &control::Drive::stop)
-        .def("definePid", &control::Drive::definePid)
-        .def("defineTransferFunction", &control::Drive::defineTransferFunction)
-        .def("defineMotor", &control::Drive::defineMotor)
-        .def("defineVelocimeter", &control::Drive::defineVelocimeter);
+        .def("run", &pampas::Drive::run)
+        .def("stop", &pampas::Drive::stop)
+        .def("definePid", &pampas::Drive::definePid)
+        .def("defineTransferFunction", &pampas::Drive::defineTransferFunction)
+        .def("defineMotor", &pampas::Drive::defineMotor)
+        .def("defineVelocimeter", &pampas::Drive::defineVelocimeter);
 
     // GPIO namespace
     py::module_ gpio = m.def_submodule("gpio", "GPIO bindings");
-    gpio.def("setupGpioPinout", &control::gpio::setupGpioPinout);
-    gpio.def("pwmWrite", &control::gpio::pwmWrite);
-    gpio.def("pinMode", &control::gpio::pinMode);
-    gpio.def("digitalWrite", &control::gpio::digitalWrite);
-    gpio.def("digitalRead", &control::gpio::digitalRead);
-    gpio.def("delay", &control::gpio::delay);
-    gpio.def("onInterrupt", &control::gpio::onInterrupt);
-    gpio.def("stopOnInterrupt", &control::gpio::stopOnInterrupt);
-    gpio.def("reset", &control::gpio::reset);
+    gpio.def("setupGpioPinout", &pampas::gpio::setupGpioPinout);
+    gpio.def("pwmWrite", &pampas::gpio::pwmWrite);
+    gpio.def("pinMode", &pampas::gpio::pinMode);
+    gpio.def("digitalWrite", &pampas::gpio::digitalWrite);
+    gpio.def("digitalRead", &pampas::gpio::digitalRead);
+    gpio.def("delay", &pampas::gpio::delay);
+    gpio.def("onInterrupt", &pampas::gpio::onInterrupt);
+    gpio.def("stopOnInterrupt", &pampas::gpio::stopOnInterrupt);
+    gpio.def("reset", &pampas::gpio::reset);
 
     // LowPass class
-    py::class_<control::LowPass>(m, "LowPass")
+    py::class_<pampas::LowPass>(m, "LowPass")
         .def(py::init<>())
-        .def("defineAlpha", &control::LowPass::defineAlpha)
-        .def("filter", &control::LowPass::filter);
+        .def("defineAlpha", &pampas::LowPass::defineAlpha)
+        .def("filter", &pampas::LowPass::filter);
 
     // Motor class
-    py::class_<control::Motor>(m, "Motor")
+    py::class_<pampas::Motor>(m, "Motor")
         .def(py::init<>())
-        .def("definePin", &control::Motor::definePin)
-        .def("definePulseWidthRange", &control::Motor::definePulseWidthRange)
-        .def("setPulseWidth", &control::Motor::setPulseWidth)
-        .def("cleanup", &control::Motor::cleanup);
+        .def("definePin", &pampas::Motor::definePin)
+        .def("definePulseWidthRange", &pampas::Motor::definePulseWidthRange)
+        .def("setPulseWidth", &pampas::Motor::setPulseWidth)
+        .def("cleanup", &pampas::Motor::cleanup);
 
     // PID class
-    py::class_<control::PID>(m, "PID")
+    py::class_<pampas::PID>(m, "PID")
         .def(py::init<>())
-        .def("setGains", &control::PID::setGains)
-        .def("setParameters", &control::PID::setParameters)
-        .def("calculate", &control::PID::calculate);
+        .def("setGains", &pampas::PID::setGains)
+        .def("setParameters", &pampas::PID::setParameters)
+        .def("calculate", &pampas::PID::calculate);
 
     // PulseWidth class
-    py::class_<control::PulseWidth>(m, "PulseWidth")
+    py::class_<pampas::PulseWidth>(m, "PulseWidth")
         .def(py::init<>())
-        .def("define", &control::PulseWidth::define)
-        .def("isDefined", &control::PulseWidth::isDefined)
-        .def("validate", &control::PulseWidth::validate);
+        .def("define", &pampas::PulseWidth::define)
+        .def("isDefined", &pampas::PulseWidth::isDefined)
+        .def("validate", &pampas::PulseWidth::validate);
 
     // Velocimeter class
-    py::class_<control::Velocimeter>(m, "Velocimeter")
+    py::class_<pampas::Velocimeter>(m, "Velocimeter")
         .def(py::init<>())
-        .def("definePin", &control::Velocimeter::definePin)
-        .def("defineWheelDiameter", &control::Velocimeter::defineWheelDiameter)
-        .def("defineAlpha", &control::Velocimeter::defineAlpha)
-        .def("getUpdateTimeInterval", &control::Velocimeter::getUpdateTimeInterval)
-        .def("getSpeed", &control::Velocimeter::getSpeed)
-        .def("getDistance", &control::Velocimeter::getDistance)
-        .def("resetDistance", &control::Velocimeter::resetDistance)
-        .def("waitForUpdate", &control::Velocimeter::waitForUpdate)
-        .def("start", &control::Velocimeter::start)
-        .def("cleanup", &control::Velocimeter::cleanup);
+        .def("definePin", &pampas::Velocimeter::definePin)
+        .def("defineWheelDiameter", &pampas::Velocimeter::defineWheelDiameter)
+        .def("defineAlpha", &pampas::Velocimeter::defineAlpha)
+        .def("getUpdateTimeInterval", &pampas::Velocimeter::getUpdateTimeInterval)
+        .def("getSpeed", &pampas::Velocimeter::getSpeed)
+        .def("getDistance", &pampas::Velocimeter::getDistance)
+        .def("resetDistance", &pampas::Velocimeter::resetDistance)
+        .def("waitForUpdate", &pampas::Velocimeter::waitForUpdate)
+        .def("start", &pampas::Velocimeter::start)
+        .def("cleanup", &pampas::Velocimeter::cleanup);
 
     // Writer class
-    py::class_<control::Writer>(m, "Writer")
+    py::class_<pampas::Writer>(m, "Writer")
         .def(py::init<std::string, std::string, std::string>())
-        .def("write_row", &control::Writer::write_row)
-        .def("close", &control::Writer::close);
+        .def("write_row", &pampas::Writer::write_row)
+        .def("close", &pampas::Writer::close);
 }

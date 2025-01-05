@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.4)
-project(pycontrol)
+project(pypampas)
 
 add_subdirectory(build/pybind11)
 
-pybind11_add_module(pycontrol bindings.cpp build/control.cpp)
+pybind11_add_module(pypampas bindings.cpp build/control.cpp)
 
-target_link_libraries(pycontrol PRIVATE wiringPi)
+target_link_libraries(pypampas PRIVATE wiringPi)

@@ -6,38 +6,38 @@ mkdir build
 cd build
 
 git clone https://github.com/pybind/pybind11
-git clone https://github.com/TeamAguarai/Control
+git clone https://github.com/TeamAguarai/pampas
 
 HDR_LIST=(
-    "Control/include/_dev.h"
-    "Control/include/Conversion.h"
-    "Control/include/gpio.h"
-    "Control/include/LowPass.h"
-    "Control/include/PID.h"
-    "Control/include/PulseWidth.h"
-    "Control/include/Steer.h"
-    "Control/include/Writer.h"
-    "Control/include/Velocimeter.h"
-    "Control/include/Motor.h"
-    "Control/include/Drive.h"
+    "pampas/include/_dev.h"
+    "pampas/include/Conversion.h"
+    "pampas/include/gpio.h"
+    "pampas/include/LowPass.h"
+    "pampas/include/PID.h"
+    "pampas/include/PulseWidth.h"
+    "pampas/include/Steer.h"
+    "pampas/include/Writer.h"
+    "pampas/include/Velocimeter.h"
+    "pampas/include/Motor.h"
+    "pampas/include/Drive.h"
 )
 
 SRC_LIST=(
-    "Control/src/_dev.cpp"
-    "Control/src/Conversion.cpp"
-    "Control/src/gpio.cpp"
-    "Control/src/LowPass.cpp"
-    "Control/src/PID.cpp"
-    "Control/src/PulseWidth.cpp"
-    "Control/src/Steer.cpp"
-    "Control/src/Writer.cpp"
-    "Control/src/Velocimeter.cpp"
-    "Control/src/Motor.cpp"
-    "Control/src/Drive.cpp"
+    "pampas/src/_dev.cpp"
+    "pampas/src/Conversion.cpp"
+    "pampas/src/gpio.cpp"
+    "pampas/src/LowPass.cpp"
+    "pampas/src/PID.cpp"
+    "pampas/src/PulseWidth.cpp"
+    "pampas/src/Steer.cpp"
+    "pampas/src/Writer.cpp"
+    "pampas/src/Velocimeter.cpp"
+    "pampas/src/Motor.cpp"
+    "pampas/src/Drive.cpp"
 )
 
-COMBINED_SRC="control.cpp"
-COMBINED_HDR="control.h"
+COMBINED_SRC="pampas.cpp"
+COMBINED_HDR="pampas.h"
 
 > $COMBINED_HDR  # Limpiar archivo combinado
 for file in "${HDR_LIST[@]}"; do
@@ -56,8 +56,8 @@ done
 cmake ..
 make
 
-mv -f pycontrol.cpython-311-aarch64-linux-gnu.so /usr/lib/python3/dist-packages/
+mv -f pypampas.cpython-311-aarch64-linux-gnu.so /usr/lib/python3/dist-packages/
 
 echo ""
-echo "Libreria PyControl instalada correctamente en /usr/lib/python3/dist-packages/"
-echo "Asegurate de importar pycontrol en tus proyectos de python"
+echo "Libreria Pypampas instalada correctamente en /usr/lib/python3/dist-packages/"
+echo "Asegurate de importar pypampas en tus proyectos de python"

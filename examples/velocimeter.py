@@ -1,6 +1,6 @@
-import pycontrol
+import pypampas
 
-velocimeter = pycontrol.Velocimeter()
+velocimeter = pypampas.Velocimeter()
 velocimeter.definePin(17)
 velocimeter.defineWheelDiameter(0.105)
 velocimeter.defineAlpha(0.9)
